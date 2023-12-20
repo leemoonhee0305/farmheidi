@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OPDDAO">
+	<insert id="orderIntoOPD">
+		INSERT INTO OPD (OIF_ID, PRO_NUM, CART_AMOUNT, CART_TOTALP, USER_ID, CART_CKID)
+		VALUES(#{oif_id}, #{pro_num}, #{cart_amount}, #{cart_totalp}, #{user_id}, #{cart_ckid})
+	</insert>
+	
+	<select id="orderWhat" resultType="opd">
+		SELECT * FROM PRODUCT AS P JOIN OPD AS O ON P.PRO_NUM = O.PRO_NUM WHERE OIF_ID = #{oif_id}
+	</select>
+
+	<select id="orderDetail" resultType="opd">
+		SELECT * FROM OIF AS I JOIN OPD AS P ON I.OIF_ID = P.OIF_ID WHERE I.OIF_ID = #{oif_id}
+	</select>
+</mapper>

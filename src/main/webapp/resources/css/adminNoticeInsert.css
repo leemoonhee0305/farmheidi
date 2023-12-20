@@ -1,0 +1,68 @@
+@charset "UTF-8";
+.alldiv {
+    text-align: center;
+    margin: auto;
+    width: 30%;
+    margin-top: 50px;
+}
+
+input.allcla {
+    width: 100%;
+    height: 20px;
+    text-align: center;
+}
+
+input.filecla.allcla {
+    height: 35px;x
+}
+textarea#content {
+    width: 100%;
+}
+.mdiv {
+    margin-bottom: 30px;
+}
+.namediv {
+    margin-bottom: 5px;
+}
+
+button.btn{
+    height: 35px;
+    border: none;
+    background-color: #3876bf;
+    border-radius: 4px;
+    color: white;
+    font-size: 15px;
+}
+
+.filebox .upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    width: 45%;
+    color: #999999;
+    border-radius: 4px;
+}
+.filebox label {
+    padding: 10px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #ccc;
+    cursor: pointer;
+    height: 10px;
+    margin-left: 10px;
+    border-radius: 4px;
+}
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+div#footer {
+    margin-top: 30px;
+    float: right;
+}

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserDAO">
+
+	<!-- 로그인 -->
+	<select id="logUser" resultType="user">
+		SELECT * FROM USER WHERE
+		USER_ID=#{user_id}
+	</select>
+
+	<!-- 회원가입 -->
+	<insert id="insertUser">
+		INSERT INTO USER (USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_MAIL) VALUES
+		(#{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_mail})
+	</insert>
+
+	<!-- 내정보 수정 -->
+	<update id="updateUser">
+		UPDATE USER SET USER_MAIL=#{user_mail},
+		USER_PHONE=#{user_phone} WHERE USER_ID=#{user_id}
+	</update>
+
+	<!-- 내정보 수정 비밀번호(암호화) -->
+	<update id="updateUserpw">
+		UPDATE USER SET USER_PW=#{hashedPassword} WHERE
+		USER_ID=#{user_id}
+	</update>
+
+	<!-- 내정보 수정 비밀번호 유효성 체크 -->
+	<select id="checkPw">
+		SELECT USER_PW FROM USER WHERE USER_ID=#{user_id}
+	</select>
+
+	<!-- 회원 탈퇴 -->
+	<update id="exitUser">
+		UPDATE USER SET USER_EXIT='Y' WHERE
+		USER_ID=#{user_id}
+	</update>
+
+	<!-- 마이페이지 내정보 조회 -->
+	<select id="myinfoUser" resultType="user">
+		SELECT * FROM USER WHERE
+		USER_ID=#{user_id}
+	</select>
+
+	<!-- 아이디 중복 체크 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM USER
+		WHERE USER_ID = #{user_id};
+	</select>
+
+	<!-- 아이디 찾기 -->
+	<select id="findIdCheck" resultType="user">
+		SELECT * FROM USER WHERE USER_NAME = #{user_name} and USER_MAIL = #{user_mail}
+	</select>
+	
+	<update id="mailkeyUp">
+		UPDATE USER SET MAIL_KEY=#{mail_key} 
+		WHERE USER_NAME = #{user_name} and USER_MAIL = #{user_mail}
+	</update>
+	
+	<select id="keyChk" resultType="int">
+		SELECT COUNT(*) FROM USER WHERE MAIL_KEY = #{mail_key}
+	</select>
+	
+	<select id="findId" resultType="user">
+		SELECT USER_ID FROM USER WHERE MAIL_KEY = #{mail_key}
+	</select>
+	
+	<!-- 비번 찾기(일치성) -->
+	<select id="findPwChk" resultType="user">
+		SELECT * FROM USER WHERE USER_ID = #{user_id} AND USER_MAIL = #{user_mail}
+	</select>
+		
+	<!-- 비번 찾기(임시 비번 부여) -->
+	<update id="findPwRan">
+		UPDATE USER SET USER_PW = #{user_pw} WHERE USER_ID = #{user_id} AND USER_MAIL = #{user_mail}
+	</update>
+	
+	<!-- 비번 찾기(임시 비번 전달) -->
+	<select id="findPw" resultType="user">
+		SELECT USER_PW FROM USER WHERE USER_PW = #{up_pw}
+	</select>
+	
+	<!-- 네이버로 가입 -->
+	<insert id="navJoin">
+		INSERT INTO USER (USER_ID, USER_NAME, USER_PHONE, USER_MAIL) VALUES (#{idN},
+		#{nameN}, #{mobileN}, #{emailN})
+	</insert>
+	
+	<!-- 카카오로 가입 -->
+	<insert id="kaoJoin">
+		INSERT INTO USER (USER_ID, USER_NAME, USER_PHONE, USER_MAIL) VALUES (#{idK},
+		#{nameK}, #{mobileK}, #{emailK})
+	</insert>
+
+</mapper>

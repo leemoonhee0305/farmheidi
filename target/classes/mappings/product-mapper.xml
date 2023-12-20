@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductDAO">
+
+	<select id="getProductList" resultType="product">
+		SELECT * FROM product WHERE 1=1
+		<if test="inUser == 'inUser' "> AND STOP='Y' </if>
+		AND PRO_NAME LIKE CONCAT('%',#{searchKeyword},'%') 
+		<if test="search == '' "> ORDER BY PRO_NUM </if>
+		<if test="search == 'DATE' "> ORDER BY PRO_DATE DESC </if>
+		<if test="search == 'LOWPRICE' "> ORDER BY PRO_PRICE </if>
+		<if test="search == 'HIGHPRICE' "> ORDER BY PRO_PRICE DESC </if>
+		<if test="search == 'NAME' "> ORDER BY PRO_NAME </if>
+		limit #{listcnt} offset #{start}
+	</select>
+	
+	<select id="getProductDetail" resultType="product">
+		SELECT * FROM product WHERE pro_num = #{pro_num}
+	</select>
+	
+	<!-- 총 상품 갯수 출력 -->
+	<select id="countProduct" resultType="int">
+		SELECT COUNT(*) FROM product WHERE 1=1
+		<if test="inUser == 'inUser' "> AND STOP='Y' </if>
+		<if test="searchKeyword != '' "> AND pro_name LIKE CONCAT('%',#{searchKeyword},'%') </if>
+	</select>
+	
+	<!-- 선택삭제 -->
+   <delete id="delSelProd">
+      DELETE FROM PRODUCT WHERE PRO_NUM = #{pro_num};
+   </delete>
+   
+   <!-- 판매/중지 -->
+   <update id="stop">
+      UPDATE PRODUCT 
+      SET
+      STOP = #{stop}
+      WHERE PRO_NUM = #{pro_num}
+   </update>
+   
+   <!-- 등록 -->
+	<insert id="insertProd">
+		INSERT INTO product (pro_num, pro_name, pro_file, pro_price, pro_stock, pro_desc) 
+		VALUES (#{pro_num},#{pro_name},#{pro_file},#{pro_price},#{pro_stock},#{pro_desc})
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="updateProd">
+		UPDATE PRODUCT 
+		SET
+			PRO_NAME = #{pro_name},
+			PRO_FILE = #{pro_file},
+			PRO_PRICE = #{pro_price},
+			PRO_STOCK = #{pro_stock},
+			PRO_DESC =#{pro_desc}
+		WHERE
+			PRO_NUM = #{pro_num}
+	</update>
+	
+	<!-- 상품관리자페이지 선택삭제 -->
+   <delete id="delOneProduct">
+      DELETE FROM PRODUCT WHERE PRO_NUM = #{pro_num};
+   </delete>
+	
+	<select id="orderHistoryCnt" resultType="int">
+		SELECT COUNT(*) FROM OPD WHERE PRO_NUM = #{pro_num}
+	</select>
+	
+	<select id="getFileName" resultType="product">
+		SELECT PRO_FILE FROM PRODUCT WHERE PRO_NUM = #{pro_num}
+	</select>
+	
+	<select id="getProductListDESC" resultType="product">
+    	SELECT * FROM PRODUCT WHERE 1=1 ORDER BY PRO_NUM DESC;
+    </select>
+	
+</mapper>

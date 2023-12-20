@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QNADAO">
+
+	<select id="getQNA" resultType="qna">
+		SELECT * FROM QNA WHERE QNA_NUM = #{qna_num}
+	</select>
+
+	<insert id="insertQNA">
+		INSERT INTO QNA (QNA_TITLE, QNA_ID, QNA_CONTENT, QNA_FILENAME, QNA_SECRET, QNA_PASSWORD,QNA_REPLYDATE)
+		VALUES(#{qna_title},#{qna_id},#{qna_content},#{qna_filename},#{qna_secret},#{qna_password},null)
+	</insert>
+
+	<update id="updateQNA">
+		UPDATE QNA
+		SET QNA_TITLE = #{qna_title}, QNA_ID = #{qna_id}, QNA_CONTENT = #{qna_content}, QNA_FILENAME = #{qna_filename}, QNA_SECRET = #{qna_secret}, QNA_PASSWORD = #{qna_password}
+ 		WHERE QNA_NUM = #{qna_num}
+	</update>
+
+	<delete id="deleteQNA">
+		DELETE FROM QNA WHERE
+		QNA_NUM = #{qna_num}
+	</delete>
+	
+	<select id="getQNAList" resultType="qna">
+		SELECT * FROM QNA WHERE 1=1
+		<if test="searchCondition == 'QNA_TITLE' ">AND QNA_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'QNA_CONTENT' ">AND QNA_CONTENT LIKE CONCAT('%', #{searchKeyword}, '%')</if>
+		ORDER BY QNA_NUM DESC
+		limit #{listcnt} offset #{start}
+	</select>
+	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countQNA" resultType="int">
+		SELECT COUNT(*) FROM QNA WHERE 1=1
+		<if test="searchCondition == 'QNA_TITLE' "> AND QNA_TITLE LIKE CONCAT('%',#{searchKeyword},'%') </if>
+		<if test="searchCondition == 'QNA_CONTENT' "> AND QNA_CONTENT LIKE CONCAT('%',#{searchKeyword},'%') </if>
+	</select>
+	
+<!-- 	조회수 카운트 -->
+	<update id="updateCntQNA">
+		UPDATE QNA SET QNA_CNT = IFNULL(#{qna_cnt}, 0)+1 WHERE QNA_NUM = #{qna_num}
+	</update>
+	
+	<!-- 업로드한 파일 삭제 -->
+	<delete id="deleteQNAFile">
+		UPDATE QNA
+		SET QNA_FILENAME = NULL
+ 		WHERE QNA_NUM = #{qna_num}
+	</delete>
+	
+	  <select id="getPasswordByQnaNum" resultType="java.lang.String">
+        SELECT QNA_PASSWORD
+        FROM QNA
+        WHERE QNA_NUM = #{qna_num}
+    </select>
+    
+<!--     답변하기 -->
+    <update id="updateQNAReply">
+    UPDATE QNA
+		SET QNA_REPLY = #{qna_reply}, QNA_REPLYDATE = NOW()
+ 		WHERE QNA_NUM = #{qna_num}
+    </update>
+</mapper>

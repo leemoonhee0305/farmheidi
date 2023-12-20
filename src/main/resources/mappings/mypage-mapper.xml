@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MypageDAO">
+	<!-- 마이페이지 내정보 조회 -->
+	<select id="myinfoUser" resultType="mypage">
+		SELECT * FROM USER WHERE USER_ID=#{user_id}
+	</select>
+
+	<!-- 마이페이지 체험 예약 조회 -->
+	<select id="myResvList" resultType="mypage">
+		SELECT * FROM RESV WHERE RESV_USERID=#{resv_userid} ORDER BY RESV_NUM
+	</select>
+
+	<!-- 마이페이지 주문 배송 조회 -->
+	<select id="myOrderList" resultType="mypage">
+		SELECT * FROM OIF AS O JOIN USER AS U ON O.USER_ID = U.USER_ID WHERE U.USER_ID=#{user_id} 
+	</select>
+
+	<!-- 마이페이지 나의 질문 조회 -->
+	<select id="myQnaList" resultType="mypage">
+		SELECT * FROM QNA AS Q JOIN USER AS U ON Q.QNA_ID = U.USER_ID WHERE U.USER_ID=#{user_id} 
+	</select>
+		
+	<!-- 마이페이지 체험 예약 글 갯수 출력 -->
+	<select id="countResv" resultType="int">
+		SELECT COUNT(*) FROM RESV WHERE RESV_USERID=#{resv_userid}
+	</select>
+	
+	<!-- 마이페이지 주문 배송 갯수 출력 -->
+	<select id="countOrder" resultType="int">
+		SELECT COUNT(*) FROM OIF WHERE USER_ID = #{user_id} 
+	</select>
+	
+	<!-- 마이페이지 질문 글 갯수 출력 -->
+	<select id="countMyqna" resultType="int">
+		SELECT COUNT(*) FROM QNA  
+	</select>
+	
+	<!-- 마이페이지 체험상품 예약취소  -->
+	<update id="myresvCan">
+		UPDATE RESV SET RESV_STATUS = 'y' WHERE RESV_NUM = #{resv_num}
+	</update>
+	
+	
+	
+</mapper>

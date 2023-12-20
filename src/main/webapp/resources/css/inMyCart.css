@@ -1,0 +1,212 @@
+html, body {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+body {
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+h4#cartTitle{
+	width: 50%;
+	margin: 0 auto;
+	margin-bottom: 50px;
+	font-size: 30px;	
+}
+input[type=checkbox]{
+	width: 18px;
+	height: 18px;
+}
+button{
+  all: unset;
+}
+#entireForm{
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+img.productIMG {
+	width: 100px;
+	height: 100px;
+}
+img.cartTrashButton{
+	width: 20px;
+}
+
+table{
+	width: 100%;
+}
+table, th, td{
+	border-bottom: 1px solid #ccc;
+	padding: 20px 0;
+}
+th{
+	font-size: 18px;
+	border-top: 1px solid #ccc;
+	color: #bbb;
+}
+a.productLink{
+	text-decoration: none !important;
+	color: #353535;
+	font-size: 17px;
+	font-weight: bold;
+}
+span.numberStrong{
+	font-weight: bold;
+}
+td.proName{
+	text-align: left;
+}
+td.resultPriceTD{
+	width: 13%!important;
+}
+td.eachPrice{
+	font-size: 17px;	
+}
+#priceSection{
+	font-size: 20px;
+	border-bottom: 1px solid #ccc;
+	padding: 20px;
+	color: #353535;
+	text-align: right;
+	word-spacing: 10px;
+}
+#btns{
+	margin: 10px 0 40px 0;
+	display: flex;
+	justify-content: space-between;
+}
+#btns2{
+	margin: 40px 0 100px 0;
+}
+span.cartBtnComment{
+	font-size: 14px;
+	color: #353535;
+	padding: 5px;
+}
+.cartBtn{
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+}
+.cartBtn:hover{
+	border: 1px solid black;
+}
+.colorBtn{
+	border: 1px solid #26588d;
+	padding: 8px 12px;
+	color: #e0ffff;
+	background-color: #26588d;
+	border-radius: 8px;
+}
+.colorBtn:hover{
+	background: #00a9ff;
+	color: white;
+	border: 1px solid #00a9ff; 
+}
+a.cartBtn{
+	text-decoration: none !important;
+	color: #353535;
+}
+#priceBoxTable{
+	margin-bottom: 40px;
+}
+.priceBox{
+	border: 1px solid #ccc;
+	font-size: 20px;
+	color: #353535;
+}
+.btnTextSel{
+	display: none;
+}
+
+
+
+
+
+/* @media (max-width: 412px) { */
+@media (max-width: 430px) {
+	* {
+		box-sizing: border-box;
+		font-weight: bold;
+	}
+	div#entireForm{
+		width: 90%;
+	}
+	h1{
+		font-size: 30px !important;
+	}
+	form{
+		width: 100%;
+	}
+	table, span{
+		font-size: 17px;
+	}
+	.entTable tr, td{
+		display: block;
+		border: none;
+	}
+	.entTable th{
+		display: none;
+	}
+	.entTable tr{
+		border-top: 1px solid #ccc;
+		display: flex;
+		align-items: center;
+	}
+	td.eachPrice{
+		display: none;
+	}
+	td.proName{
+		width: 100%;
+	}
+	div.rpwon{
+		display: flex;
+	}
+	td.heightTD{
+		width: 30%;
+		padding-top: 30px; 
+		margin-left: 15px;
+	}
+	#priceSection, .priceBox{
+		font-size: 17px;
+	}
+	#priceSection{
+		display: flex;
+		justify-content: space-evenly;
+	}
+	.notNeed{
+		display: none;
+	}
+	div#btns{
+		width: 100%;
+	}
+	.btnText{
+		display: none;
+	}
+	.btnTextSel{
+		display: inline;
+	}
+	#priceBoxTable{
+		width: 100%;
+		border: 1px solid #ccc;
+		margin: 5px auto;
+	}
+	.priceBox{
+		font-size: 18px;
+		border: none;
+	}
+	span.cartBtnComment{
+		display: none;
+	}
+	img.productIMG {
+	    display: block;
+	    margin: 0 auto;
+	}
+	
+}

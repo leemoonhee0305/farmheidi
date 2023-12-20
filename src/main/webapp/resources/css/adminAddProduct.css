@@ -1,0 +1,60 @@
+div#entireBox{
+	width: 80%;
+	margin: 50px auto;
+}
+.proAddTable{
+	width: 100%;
+	margin: 0 auto;
+}
+.proAddTable th, .proAddTable td{
+	padding: 15px 20px;
+	border-bottom: 1px solid #353535;
+}
+.proAddTable th > h4{
+	font-weight: bold;
+}
+.proAddTable th{
+	text-align: center;	
+	background-color: #eee;
+}
+th.noColor{
+	background-color: white;
+}
+#selectBox{
+	height: 34px;
+}
+th.noBottomLine, td.noBottomLine{
+	border: none;
+}
+input#pro_name{
+	width: 100%;
+}
+input.proInputH{
+	height: 30px;
+}
+input.noUpdate{
+	background-color: #eee;
+	border-radius: 2px;
+	border: none;
+	border: 1px solid black;
+}
+img.proIMG{
+	width: 300px;
+}
+#submitBtnDiv{
+	width: 30%;
+	margin: 50px auto;
+	text-align: center;
+}
+#submitBtn{
+	border: 1px solid #26588d;
+	background-color: #26588d;
+	color: #e0ffff;
+	padding: 12px 20px;
+}
+#submitBtn:hover{
+	background-color: #00a9ff;
+	color: white;
+	border: 1px solid #00a9ff;
+	cursor: pointer;
+}

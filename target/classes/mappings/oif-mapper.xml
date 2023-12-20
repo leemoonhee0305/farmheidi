@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OIFDAO">
+
+	<insert id="orderIntoOIF">
+		INSERT INTO OIF  
+		(OIF_ID, CART_CKID, USER_ID, USER_NAME, USER_MAIL, USER_PHONE, 
+		OIF_ORDTEL, OIF_ORDADDR1, OIF_ORDADDR2, OIF_ORDADDR3, 
+		OIF_SHIPNAME, OIF_SHIPMAIL, OIF_SHIPPHONE, OIF_SHIPTEL, 
+		OIF_SHIPADDR1, OIF_SHIPADDR2, OIF_SHIPADDR3, OIF_SHIPMEMO, 
+		OIF_ORDTYPE, OIF_KINDAMOUNT, OIF_SHIPFEE, OIF_TOTAL) 
+		VALUES 
+		(#{oif_id}, #{cart_ckid}, #{user_id}, #{user_name}, #{user_mail}, #{user_phone}, 
+		#{oif_ordtel}, #{oif_ordaddr1}, #{oif_ordaddr2}, #{oif_ordaddr3}, 
+		#{oif_shipname}, #{oif_shipmail}, #{oif_shipphone}, #{oif_shiptel}, 
+		#{oif_shipaddr1}, #{oif_shipaddr2}, #{oif_shipaddr3}, #{oif_shipmemo}, 
+		#{oif_ordtype}, #{oif_kindamount}, #{oif_shipfee}, #{oif_total})
+	</insert>
+	
+	<select id="getOrderInfo" resultType="oif">
+		SELECT * FROM OIF WHERE OIF_ID = #{oif_id}
+	</select>
+	
+	<select id="getAllOrder" resultType="oif">
+		SELECT * FROM OIF WHERE 1=1 
+		<if test="searchCondition == 'orderID' "> AND OIF_ID LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'userID' "> AND USER_ID LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'userName' "> AND USER_NAME LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'shipName' "> AND OIF_SHIPNAME LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'shipPhone' "> AND OIF_SHIPPHONE LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'shipPhone' "> AND OIF_SHIPPHONE LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchDate1 != null and searchDate2 != null"><![CDATA[ AND OIF_DATE >= #{searchDate1} AND OIF_DATE <= #{searchDate2} ]]></if>
+		<if test="searchOrderType == '모바일결제' "> AND OIF_ORDTYPE = '모바일결제'</if>
+		<if test="searchOrderState == '입금완료' "> AND OIF_SHIPSTATE = '입금완료'</if>
+		<if test="searchOrderState == '배송준비' "> AND OIF_SHIPSTATE = '배송준비'</if>
+		<if test="searchOrderState == '배송중' "> AND OIF_SHIPSTATE = '배송중'</if>
+		<if test="searchOrderState == '배송완료' "> AND OIF_SHIPSTATE = '배송완료'</if>
+		<if test="searchOrderState == '주문취소' "> AND OIF_CANSTATE = '주문취소'</if>
+		ORDER BY OIF_DATE DESC
+		limit #{listcnt} offset #{start}
+	</select>
+
+	<!-- 총 주문목록 갯수 출력 -->
+	<select id="countOrderList" resultType="int">
+		SELECT COUNT(*) FROM OIF WHERE 1=1
+		<if test="searchCondition == 'orderID' "> AND OIF_ID LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'userID' "> AND USER_ID LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'userName' "> AND USER_NAME LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'shipName' "> AND OIF_SHIPNAME LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'shipPhone' "> AND OIF_SHIPPHONE LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchCondition == 'shipPhone' "> AND OIF_SHIPPHONE LIKE CONCAT('%',#{searchKeyword}, '%')</if>
+		<if test="searchDate1 != null and searchDate2 != null"><![CDATA[ AND OIF_DATE >= #{searchDate1} AND OIF_DATE <= #{searchDate2} ]]></if>
+		<if test="searchOrderType == '모바일결제' "> AND OIF_ORDTYPE = '모바일결제'</if>
+		<if test="searchOrderState == '입금완료' "> AND OIF_SHIPSTATE = '입금완료'</if>
+		<if test="searchOrderState == '배송준비' "> AND OIF_SHIPSTATE = '배송준비'</if>
+		<if test="searchOrderState == '배송중' "> AND OIF_SHIPSTATE = '배송중'</if>
+		<if test="searchOrderState == '배송완료' "> AND OIF_SHIPSTATE = '배송완료'</if>
+		<if test="searchOrderState == '주문취소' "> AND OIF_CANSTATE = '주문취소'</if>
+	</select>
+<!-- 		<if test="searchKeyword != '' "> AND pro_name LIKE CONCAT('%',#{searchKeyword},'%') </if> -->
+	
+	<!-- 총 주문액 합계 출력 -->
+	<select id="getOrderTotal" resultType="Integer">
+		SELECT SUM(OIF_TOTAL) FROM OIF WHERE OIF_CANSTATE != '주문취소'
+	</select>
+	
+	<!-- 주문현황 목록 갯수 불러오기 -->
+	<select id="getOrderClearCount" resultType="int">
+		SELECT COUNT(*) FROM OIF WHERE OIF_SHIPSTATE='입금완료' AND OIF_CANSTATE != '주문취소'
+	</select>
+	<select id="getShipPrepareCount" resultType="int">
+		SELECT COUNT(*) FROM OIF WHERE OIF_SHIPSTATE='배송준비' AND OIF_CANSTATE != '주문취소'
+	</select>
+	<select id="getShipIngCount" resultType="int">
+		SELECT COUNT(*) FROM OIF WHERE OIF_SHIPSTATE='배송중' AND OIF_CANSTATE != '주문취소'
+	</select>
+	<select id="getShipClearCount" resultType="int">
+		SELECT COUNT(*) FROM OIF WHERE OIF_SHIPSTATE='배송완료' AND OIF_CANSTATE != '주문취소'
+	</select>
+	<select id="getCancelCount" resultType="int">
+		SELECT COUNT(*) FROM OIF WHERE OIF_CANSTATE='주문취소'
+	</select>
+	
+	
+	<update id="updateShipInfo">
+		UPDATE OIF SET 
+		USER_NAME = #{user_name},
+		OIF_ORDTEL = #{oif_ordtel},
+		USER_PHONE = #{user_phone},
+		OIF_ORDADDR1 = #{oif_ordaddr1},
+		OIF_ORDADDR2 = #{oif_ordaddr2},
+		OIF_ORDADDR3 = #{oif_ordaddr3},
+		USER_MAIL = #{user_mail},
+		OIF_SHIPNAME = #{oif_shipname}, 
+		OIF_SHIPTEL = #{oif_shiptel}, 
+		OIF_SHIPPHONE = #{oif_shipphone}, 
+		OIF_SHIPADDR1 = #{oif_shipaddr1}, 
+		OIF_SHIPADDR2 = #{oif_shipaddr2}, 
+		OIF_SHIPADDR3 = #{oif_shipaddr3}, 
+		OIF_SHIPMAIL = #{oif_shipmail} 
+		WHERE OIF_ID = #{oif_id}
+	</update>	
+	
+<!-- 	<update id="updateShipstate"> -->
+<!-- 		UPDATE OIF SET OIF_SHIPSTATE = #{oif_shipstate} -->
+<!-- 		WHERE OIF_ID = #{oif_id} -->
+<!-- 	</update> -->
+	
+	<update id="updateShipstate">
+		UPDATE OIF SET 
+		OIF_SHIPSTATE = #{oif_shipstate},
+		OIF_CANSTATE = #{oif_canstate}
+		<if test="oif_canstate == '정상주문' ">, OIF_CANDATE = NULL</if>
+		<if test="oif_canstate == '주문취소' ">, OIF_CANDATE = NOW()</if>
+		WHERE OIF_ID = #{oif_id}
+	</update>
+	
+	<!--11.16  -->
+	<select id="adoifMain" resultType="oif">
+		SELECT * FROM OIF ORDER BY OIF_DATE DESC, OIF_ID DESC LIMIT 5
+	</select>
+
+</mapper>

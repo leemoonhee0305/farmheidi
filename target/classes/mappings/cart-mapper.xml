@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CartDAO">
+
+	<select id="countCart" resultType="int">
+		SELECT COUNT(*) FROM cart WHERE PRO_NUM = #{pro_num}
+		<if test="user_id == null"> AND CART_CKID = #{cart_ckid} </if>
+		<if test="cart_ckid == null"> AND USER_ID = #{user_id}</if>
+		
+	</select>
+	
+	<select id="inMyCart" resultType="cart">
+		SELECT * FROM PRODUCT AS P JOIN
+		CART AS C ON P.PRO_NUM = C.PRO_NUM WHERE 1=1 
+		<if test="user_id == null"> AND CART_CKID = #{cart_ckid} </if>
+		<if test="cart_ckid == null"> AND USER_ID = #{user_id}</if>
+	</select>
+
+	<select id="inCartAmount" resultType="cart">
+		SELECT CART_AMOUNT,
+		CART_TOTALP FROM CART WHERE PRO_NUM = #{pro_num}
+		<if test="user_id == null"> AND CART_CKID = #{cart_ckid}</if>
+		<if test="cart_ckid == null"> AND USER_ID = #{user_id}</if>
+	</select>
+	
+	<select id="inCookieCart" resultType="cart">
+		SELECT PRO_NUM, CART_AMOUNT, CART_TOTALP FROM CART WHERE CART_CKID = #{cart_ckid}
+<!-- 		SELECT PRO_NUM, CART_AMOUNT, CART_TOTALP FROM CART WHERE USER_ID = #{user_id} -->
+	</select>
+	
+	<insert id="cartOneInsert">
+		INSERT INTO CART (pro_num, CART_CKLIMIT, cart_amount,
+		cart_totalp,
+		<if test="user_id == null">
+			CART_CKID
+		</if>
+		<if test="user_id != null">
+			user_id
+		</if>
+		) VALUES ( #{pro_num}, NOW(), #{cart_amount}, #{cart_totalp},
+		<if test="user_id == null">
+			#{cart_ckid}
+		</if>
+		<if test="user_id != null">
+			#{user_id}
+		</if>
+		)
+	</insert>
+	
+	
+	<update id="cartUpdate">
+		UPDATE CART
+		SET
+		CART_AMOUNT = #{cart_amount},
+		CART_TOTALP = #{cart_totalp},
+		CART_DATE = now()
+		WHERE PRO_NUM = #{pro_num}
+		<if test="user_id == null"> AND CART_CKID = #{cart_ckid}</if>
+		<if test="cart_ckid == null"> AND USER_ID = #{user_id}</if>
+	</update>
+	
+	<update id="fromCookieToUser">
+		UPDATE CART SET USER_ID = #{user_id} WHERE CART_CKID = #{cart_ckid} AND USER_ID = '비회원'
+	</update>
+	
+	<!-- 중복제거 -->
+	<delete id="cartDoubleDelete">
+<!-- 		DELETE FROM CART WHERE PRO_NUM = #{pro_num} AND USER_ID = #{user_id} AND CART_CKID != #{cart_ckid} -->
+		DELETE FROM CART WHERE PRO_NUM = #{pro_num} AND USER_ID = #{user_id} AND CART_CKID IS NULL
+	</delete>
+	<!-- 중복제거2 -->
+	<delete id="cartDoubleDeleteT">
+		DELETE FROM CART WHERE PRO_NUM = #{pro_num} AND USER_ID = #{user_id} AND CART_CKID != #{cart_ckid}
+	</delete>
+	
+
+	<!-- 일부삭제 -->
+	<delete id="cartDelete">
+		DELETE FROM CART WHERE PRO_NUM = #{pro_num}
+		<if test="user_id != null"> AND USER_ID = #{user_id}</if>
+		<if test="cart_ckid != null"> AND CART_CKID = #{cart_ckid}</if>
+	</delete>
+	
+	<!-- 전체삭제 -->
+	<delete id="delCart">
+		DELETE FROM CART
+		<if test="user_id != null"> WHERE USER_ID = #{user_id}</if>
+		<if test="cart_ckid != null"> WHERE CART_CKID = #{cart_ckid}</if>
+	</delete>
+	
+	<!-- 선택삭제 -->
+	<delete id="delSelCart">
+		DELETE FROM CART WHERE PRO_NUM = #{pro_num}
+		<if test="user_id != null"> AND USER_ID = #{user_id}</if>
+		<if test="cart_ckid != null"> AND CART_CKID = #{cart_ckid}</if>
+	</delete>
+	
+	<!-- 선택구매 -->
+    <select id="selBuy" resultType="cart">
+      	SELECT * FROM PRODUCT AS P JOIN CART AS C ON P.PRO_NUM = C.PRO_NUM WHERE C.PRO_NUM = #{pro_num}
+      	<if test="user_id != null"> AND USER_ID = #{user_id}</if>
+      	<if test="cart_ckid != null"> AND CART_CKID = #{cart_ckid}</if>
+    </select>
+    
+	<!-- 일주일전 장바구니 데이터갯수 확인하기 -->
+	<select id="cntWeekCart" resultType="_int">
+    <![CDATA[
+    	SELECT COUNT(*) FROM CART WHERE CART_DATE <= DATE_ADD(NOW(), INTERVAL -7 DAY)
+	]]>
+	</select>
+	
+    <!-- 일주일전 장바구니 데이터 제거 -->
+	<delete id="delWeekCart">
+    <![CDATA[
+		DELETE FROM CART WHERE CART_DATE <= DATE_ADD(NOW(), INTERVAL -7 DAY )
+	]]>
+	</delete>
+
+
+   
+</mapper>

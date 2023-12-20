@@ -1,0 +1,66 @@
+@charset "UTF-8";
+.boxx {
+    text-align: center;
+    margin: auto;
+    width: 50%;
+
+}
+.tbl{
+	border-collapse: collapse;
+	margin: auto;
+	width: 100%;
+}
+th.review {
+    border-bottom: 2px solid #ccc;
+    padding: 5px;
+    height: 30px;
+}
+td.review {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
+button.admina {
+    float: right;
+    margin-top: 10px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid #ccc;
+    background-color: #7695B7;
+    height: 30px;
+    border-radius: 4px;
+}
+.selbtn{
+	border:1px solid #ccc;
+	background-color: #7695B7;
+	border-radius: 4px;
+	color: white;
+	height: 30px;
+	width: 45px;
+}
+.delbtn{
+	border:1px solid #ccc;
+	border-radius: 4px;
+	height: 30px;
+	width: 45px;
+}
+.reviewh{
+	margin: 50px 0 30px 0;
+}
+.delbtn:hover{
+	cursor: pointer;
+	font-weight: bold;
+}
+.selbtn:hover{
+	cursor: pointer;
+	font-weight: bold;
+}
+.admina:hover{
+	cursor: pointer;
+	font-weight: bold;
+}
+@media screen and (max-width: 415px) {
+	.boxx {
+    width: 80%;
+	}
+}

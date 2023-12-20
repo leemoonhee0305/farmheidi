@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="user" type="com.spring.farm.user.UserVO"/>
+		<typeAlias alias="playList" type="com.spring.farm.play.PlayListVO"/>
+		<typeAlias alias="resv" type="com.spring.farm.play.ResvVO" />
+		<typeAlias alias="product" type="com.spring.farm.product.ProductVO"/>
+		<typeAlias alias="cart" type="com.spring.farm.product.CartVO" />
+		<typeAlias alias="notice" type="com.spring.farm.community.NoticeVO" />
+		<typeAlias alias="qna" type="com.spring.farm.community.QNAVO" />
+		<typeAlias alias="review" type="com.spring.farm.community.ReviewVO" />
+		<typeAlias alias="mypage" type="com.spring.farm.mypage.MypageVO" />
+		<typeAlias alias="oif" type="com.spring.farm.product.OIFVO" />
+		<typeAlias alias="opd" type="com.spring.farm.product.OPDVO" />
+		<typeAlias alias="holiday" type="com.spring.farm.play.HolidayVO" />
+		<typeAlias alias="report" type="com.spring.farm.community.ReportVO"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappings/user-mapping.xml" />
+		<mapper resource="mappings/playlist-mapper.xml"/>
+		<mapper resource="mappings/resv-mapper.xml"/>
+		<mapper resource="mappings/review-mapper.xml"/>
+		<mapper resource="mappings/product-mapper.xml" />
+		<mapper resource="mappings/cart-mapper.xml" />
+		<mapper resource="mappings/notice-mapper.xml" />
+		<mapper resource="mappings/qna-mapper.xml" />
+		<mapper resource="mappings/mypage-mapper.xml" />
+		<mapper resource="mappings/admin-mapper.xml" />
+		<mapper resource="mappings/oif-mapper.xml" />
+		<mapper resource="mappings/opd-mapper.xml" />
+		<mapper resource="mappings/holiday-mapper.xml" />
+		<mapper resource="mappings/report-mapper.xml"/>
+	</mappers>
+</configuration>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PlayListDAO">
+	<!-- 체험상품 정보 인서트문 -->
+<!-- 	<insert id="insertPlay"> -->
+<!-- 		INSERT INTO PLAYLIST(PLA_NUM, PLA_NAME, PLA_DATE, PLA_PRICE, PLA_HEADCOUNT, PLA_BUSINESS, PLA_CONTENT, PLA_FIRSTTIME, PLA_LASTTIME, PLA_IMG) -->
+<!-- 		VALUES(#{pla_num},#{pla_name},#{pla_date},#{pla_price},#{pla_headcount},#{pla_business},#{pla_content},#{pla_firsttime},#{pla_lasttime},#{pla_img}) -->
+<!-- 	</insert> -->
+	
+	<!-- 체험상품 정보 조회(1줄):상품정보조회 -->
+	<select id="getPlayOne" resultType="playList">
+		SELECT * FROM PLAYLIST WHERE PLA_NUM = #{pla_num}
+	</select>
+
+	<!-- 체험상품 정보 조회(여러 줄) -->
+	<select id="getPlayList" resultType="playList">
+		SELECT * FROM PLAYLIST WHERE 1 = 1
+	</select>
+	
+	<!-- 패키지 체험상품 정보 조회(1줄):패키지상품정보조회 -->
+	<select id="getPlayPackageOne" resultType="playList">
+		SELECT * FROM PLAYLIST WHERE 1 = 1
+		ORDER BY PLA_NUM ASC
+		LIMIT 0, 1
+	</select>
+
+</mapper>

@@ -1,0 +1,126 @@
+div#entireBox {
+	width: 80%;
+	margin: 0 auto;
+}
+
+table {
+	width: 100%;
+	margin-bottom: 80px;
+}
+
+img {
+	width: 100px;
+	height: 100px;
+}
+
+th {
+	padding: 15px 0;
+}
+
+h3#clearTitle {
+	margin-bottom: 40px;
+}
+h4.infoTitle{
+	margin-bottom: 12px;
+}
+
+div#clearCommentBox {
+	width: 50%;
+	margin: 60px auto 150px auto;
+	text-align: center;
+}
+
+div#clearComment {
+	font-size: 18px;
+}
+
+.productInfo th, .productInfo td {
+	text-align: center;
+	border-top: 1px solid #ccc;
+	padding: 15px 0;
+}
+
+.productInfo th {
+	color: #bbb;
+}
+
+.payInfo th, .shipInfo th {
+	width: 20%;
+}
+
+td.proInfoName {
+	text-align: left;
+}
+
+td#proInfoTotalPrice {
+	text-align: right;
+	color: #353535;
+}
+
+span#totalPrice {
+	fint-size: 19px;
+	font-wegiht: bold;
+}
+
+.payInfo tr, .shipInfo tr {
+	border-top: 1px solid #ccc;
+}
+
+.payInfo tr:nth-child(4), .shipInfo tr:nth-child(6) {
+	border-bottom: 1px solid #ccc;
+}
+
+.payInfo td {
+	font-size: 20px;
+}
+
+div#buttons {
+	width: 50%;
+	margin: 80px auto 150px auto;
+	text-align: center;
+}
+
+button {
+	all: unset;
+}
+
+button[type=button] {
+	border: 1px solid #26588d;
+	padding: 8px 12px;
+	color: #e0ffff;
+	background-color: #26588d;
+	border-radius: 8px;
+}
+
+button[type=button]:hover {
+	background: #00a9ff;
+	color: white;
+	border: 1px solid #00a9ff;
+}
+span.mobBtn{ display: none; }
+
+
+@media (max-width: 412px) {
+	div#entireBox {
+		width: 90%;
+		margin: 0 auto;
+	}
+	table, span{
+		font-size: 16px;
+	}
+	.payInfo td {
+		font-size: 16px;
+	}
+	span.webBtn{ display: none; }
+	span.mobBtn{ display: block; }
+	.firstTH{
+		width: 35%;
+	}
+	div#buttons{
+		display: flex;
+		justify-content: space-between;
+	}
+	.shipInfo th:nth-child(1){
+		width: 30%;
+	}
+}

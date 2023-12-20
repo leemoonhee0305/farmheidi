@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReportDAO">
+
+<resultMap type="com.spring.farm.community.ReportVO" id="report">
+    <result property="qna_num" column="QNA_NUM" />
+    <result property="qna_title" column="QNA_TITLE" />
+    <result property="qna_content" column="QNA_CONTENT" />
+    <result property="qna_date" column="QNA_DATE" />
+    <result property="review_num" column="REVIEW_NUM" />
+    <result property="review_title" column="REVIEW_TITLE" />
+    <result property="review_content" column="REVIEW_CONTENT" />
+    <result property="review_date" column="REVIEW_DATE" />
+</resultMap>
+
+	<select id="getReport" resultType="report">
+		SELECT * FROM REPORT WHERE REPORT_NUM = #{report_num}
+	</select>
+	
+	
+	<select id="adminReportList" resultType="report">
+		SELECT * FROM REPORT WHERE 1=1
+	</select>
+	
+	<select id="countAllReport" resultType="int">
+		SELECT COUNT(*) FROM REPORT WHERE 1=1
+	</select>
+
+	<insert id="insertQNAReport">
+		INSERT INTO REPORT (QNA_NUM, REPORT_TITLE, REPORT_ID, REPORT_CONTENT,REPORT_DATE,REPORT_REASON)
+		VALUES(#{qna_num},#{qna_title},#{qna_id},#{qna_content},#{qna_date},#{report_reason})
+	</insert>
+	
+	<insert id="insertReviewReport">
+		INSERT INTO REPORT (REVIEW_NUM, REPORT_TITLE, REPORT_ID, REPORT_CONTENT,REPORT_DATE,REPORT_REASON)
+		VALUES(#{review_num},#{review_title},#{review_id},#{review_content},#{review_date},#{report_reason})
+	</insert>
+	
+	<delete id="onlyDeleteReport">
+		DELETE FROM REPORT WHERE
+		REPORT_NUM = #{report_num}
+	</delete>
+	
+<!-- 	<delete id="deleteQNAReport"> -->
+<!-- 		DELETE QNA, REPORT  -->
+<!-- 		FROM QNA LEFT JOIN REPORT ON QNA.QNA_NUM = REPORT.QNA_NUM -->
+<!-- 		WHERE REPORT.QNA_NUM = #{qna_num}; -->
+<!-- 	</delete> -->
+
+<!-- 	<delete id="deleteReviewReport"> -->
+<!-- 		DELETE REVIEW, REPORT  -->
+<!-- 		FROM REVIEW LEFT JOIN REPORT ON REVIEW.REVIEW_NUM = REPORT.REVIEW_NUM -->
+<!-- 		WHERE REPORT.REVIEW_NUM = #{review_num}; -->
+<!-- 	</delete> -->
+	
+	<delete id="deleteQNAReport">
+		DELETE FROM QNA WHERE
+		QNA_NUM = #{qna_num}
+	</delete>
+
+	<delete id="deleteReviewReport">
+		DELETE FROM REVIEW WHERE
+		REVIEW_NUM = #{review_num}
+	</delete>
+	
+	<select id="qnaFilename" resultType="string">
+	select qna_filename from QNA where qna_num= #{qna_num}
+	</select>
+
+	<select id="reviewFilename" resultType="string">
+	select review_filename from REVIEW where review_num= #{review_num}
+	</select>
+	
+</mapper>

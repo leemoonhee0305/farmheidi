@@ -1,0 +1,83 @@
+@charset "UTF-8";
+	.boxx {
+    text-align: center;
+    margin: auto;
+    width: 85%; /*50%*/
+
+}
+.tbl{
+	border-collapse: collapse;
+	margin: auto;
+	width: 100%;
+}
+table.tbl>tbody>tr:first-child {
+	border-bottom: 1px solid #999;
+	background-color: #F0F8FF;
+}
+table.tbl>tbody>tr:not(first-child) {
+	border-bottom: 1px solid #ebebeb;
+}
+table.tbl>tbody>tr:last-child {
+	border-bottom: 1px solid #ccc;
+}
+table.tbl>tbody>tr>th,td {
+	padding: 10px 0;
+}
+
+/*th.qna {
+    border-bottom: 2px solid #ccc;
+    padding: 5px;
+    height: 30px;
+}
+td.qna {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}*/
+
+button.admina {
+    float: right;
+    margin-top: 10px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid #ccc;
+    background-color: #3876bf;
+    height: 30px;
+    border-radius: 4px;
+}
+.selbtn{
+	border:1px solid #ccc;
+	background-color: #7695B7;
+	border-radius: 3px;
+	color: white;
+	height: 30px;
+	width: 45px;
+}
+.delbtn{
+	border:1px solid #ccc;
+	border-radius: 4px;
+	height: 30px;
+	width: 45px;
+}
+.qnah{
+	margin: 50px 0 30px 0;
+}
+.delbtn:hover{
+	cursor: pointer;
+	font-weight: bold;
+}
+.selbtn:hover{
+	cursor: pointer;
+	font-weight: bold;
+}
+.admina:hover{
+	cursor: pointer;
+	font-weight: bold;
+}
+@media screen and (max-width: 415px) {
+	.day{
+		display: none;
+	}
+	.boxx {
+    width: 85%;
+	}
+}

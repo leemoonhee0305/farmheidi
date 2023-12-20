@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+
+.form-control{
+    width: 100%;
+    height: 25px;
+    margin-bottom: 20px;
+    
+}
+
+.text{
+    width: 100%;
+    height: 75px;
+    margin-bottom: 20px;
+    
+}
+.alldiv {
+    width: 35%;
+    margin: auto;
+    margin-top: 30px;
+}
+span.input-group-text {
+    display: inline-block;
+    margin-bottom: 8px;
+}
+.textarea{
+	 resize: none;
+	 height: 70px;	 
+}
+.header{
+	text-align:center;
+}
+button#ReviewListget {
+    float: right;
+}
+
+.reptDtdiv { width: 80%; margin: auto; margin-top: 30px; }
+
+* { border-box: border-box; }
+
+div.reptDtdiv {
+    width: 85%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 85px;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    padding: 30px 0;
+}
+
+h2.header {
+	margin-top: 50px;
+}
+
+input.form-control, textarea.text{
+	border: 1px solid #26588d;
+	border-radius: 3px;
+	padding:6px 8px;
+}
+
+div#footer {
+	margin: 15px 0;
+}
+div#footer>button {
+	background-color: #26588d;
+	color: #e0ffff;
+	border: 1px solid #26588d;
+	border-radius: 3px;
+	cursor: pointer;
+	padding: 7px 13px;
+}
+
+
+div.container-fluid {
+	margin: 0 auto;
+   	width: 50%;
+}
+@media screen and (max-width: 979px) {
+	div.container-fluid {
+		margin: 0 auto;	
+    	width: 65%;
+	}
+}
+@media screen and (max-width: 659px) {
+	div.container-fluid {
+		margin: 0 auto;	
+    	width: 75%;
+	}
+}
+@media screen and (max-width: 415px) {
+	div.container-fluid {
+		margin: 0 auto;	
+    	width: 85%;
+	}
+}
+
+
+.btndelete{background-color: #26588d;
+	color: #e0ffff;
+	border: 1px solid #26588d;
+	border-radius: 3px;
+	cursor: pointer;
+	padding: 7px 13px;}
+    
+.btnreportlist{background-color: #26588d;
+	color: #e0ffff;
+	border: 1px solid #26588d;
+	border-radius: 3px;
+	cursor: pointer;
+	padding: 7px 13px;
+float: right;}
+
+.btndelete:hover{
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.btnreportlist:hover{
+	cursor: pointer;
+	font-weight: bold;
+}

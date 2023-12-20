@@ -1,0 +1,108 @@
+table {border-collapse: collapse;}
+table, th, td {
+ 	border: 1px solid black;
+ }
+div#entireBox{
+	width: 90%;
+	margin: 30px auto;
+}
+table{
+	width: 100%;
+	text-align: center;
+}
+.totalInfo th, .searchBox th, .recentOrderTable th{
+	background-color: #eee;
+}
+div.eachTableBox{
+	margin-bottom: 30px;
+}
+.searchBox td{
+	font-size: 16px;
+	padding: 10px;
+	text-align: left;
+}
+.searchBox td > select, .searchBox td > input {
+	font-size: 16px;
+}
+.searchBtns{
+	text-align: center;
+	margin: 10px auto;
+}
+.totalInfo th, .recentOrderTable th, .recentOrderTable td{
+	padding: 10px;
+}
+.totalInfo td{
+	padding: 20px 0;
+}
+.modifyBtn, div.searchBtns > input{
+	border: 1px solid #7695B7;
+	background-color: #7695B7;
+	color: #e0ffff;
+}
+div.searchBtns > input {
+	font-size: 16px;
+	padding: 10px 15px;
+}
+.recentOrderTable th:nth-child(2), .recentOrderTable th:nth-child(9){
+	width: 190px;
+} 
+.modifyBtn:hover , div.searchBtns > input:hover{
+	background-color: #00a9ff;
+	color: white;
+	border: 1px solid #00a9ff;
+	cursor: pointer;
+}
+section#pageList {
+			margin-top: 20px;
+			text-align: center;
+		}
+		section.pageList>button {
+			margin:0 0 5px 5px;
+			background-color: #26588d;
+			color: #e0ffff;
+			border: 1px solid #26588d;
+			cursor: pointer;
+		}
+		section.pageList>button:hover {
+			background: #00a9ff;
+			color: white;
+			border: none;
+		}
+		section.pageList>button:active {
+			background: lightgray;
+			color: white;
+			border: none;
+		}
+		section#pageList>button.prevbtn {
+		   width:2rem; height:2rem;
+		   border: none;
+		   background: none;
+		   color: black;
+		}
+		section#pageList>button.listbtn {
+			width:2rem; height:2rem;
+			border:1px solid #888;
+			border-radius:1rem;
+		}
+		section#pageList>button.viewbtn {
+			background-color: white; /*#00a9ff*/
+			color: #26588d;
+			border: 1px solid #26588d;
+			font-weight: bold;
+		}
+		section#pageList>button.nextbtn {
+		   width:2rem; height:2rem;
+		   /*border:1px solid #888;
+		   border-radius:0.2rem;*/
+		   border: none;
+		   background: none;
+		   color: black;
+		}
+		section#pageList>button.notlinkbtn {
+			cursor: default;
+		}
+		section.pageList>button.notlinkbtn:active {
+			background: #00a9ff;
+			color: white;
+			border: none;
+		}

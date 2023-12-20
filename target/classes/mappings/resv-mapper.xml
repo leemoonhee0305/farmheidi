@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ResvDAO">
+
+   <insert id="insertResv">
+      INSERT INTO RESV(RESV_NUM, RESV_DATE, RESV_TOTALPRICE,
+      RESV_HEADCOUNT, RESV_YOUTHHEADCOUNT, RESV_NAME, RESV_PNUM, RESV_STATUS, RESV_USERID, RESV_REQ, RESV_COMPAY, RESV_TEL, RESV_SPTEL)
+      VALUES(#{resv_num}, #{resv_date}, #{resv_totalprice},
+      #{resv_headcount},
+      #{resv_youthheadcount}, #{resv_name}, #{resv_pnum},
+      #{resv_status},
+      #{resv_userId}, #{resv_req}, #{resv_compay}, #{resv_tel}, #{resv_sptel})
+   </insert>
+   
+	<!-- 체험상품 예약 정보 삭제문 -->
+	<delete id="deleteResv">
+		DELETE FROM RESV WHERE RESV_NUM = #{resv_num}
+	</delete>
+
+	<!-- 체험상품 예약 정보 조회:회원예약정보조회 -->
+	<select id="getResv" resultType="resv">
+		SELECT * FROM RESV WHERE RESV_NUM = #{resv_num}
+	</select>
+
+	<!-- 체험상품 예약 정보 조회(여러 줄) -->
+	<select id="getResvList" resultType="resv">
+		SELECT * FROM RESV WHERE 1 = 1
+		ORDER BY RESV_NUM DESC;
+	</select>
+	
+	<!-- 체험상품 예약취소 업데이트문 -->
+	<update id="cancelResv">
+		UPDATE RESV SET RESV_STATUS = 'y' WHERE RESV_NUM = #{resv_num}
+	</update>
+	
+	<!-- 개인 체험 내역 조회하기(여러 줄) -->
+	<select id="getUserResvList" resultType="resv">
+		SELECT * FROM RESV WHERE 1 = 1
+			AND RESV_USERID = #{resv_userId}
+			<if test="searchSdate != null and searchEdate != null ">
+				<![CDATA[
+				AND (RESV_DATE >= #{searchSdate} AND RESV_DATE <= #{searchEdate} )
+				]]>
+			</if>
+		ORDER BY RESV_NUM DESC
+	</select>
+	
+	<!-- 관리자 - 체험상품 예약 정보 조회(여러 줄) -->
+	<select id="getadminResvList" resultType="resv">
+		SELECT * FROM RESV WHERE 1 = 1
+			<if test="searchKeyword != '' ">
+				AND ( RESV_NAME LIKE CONCAT('%',#{searchKeyword},'%') OR RESV_USERID LIKE CONCAT('%',#{searchKeyword},'%') )
+			</if>
+			<if test="searchSdate != null and searchEdate != null ">
+				<![CDATA[
+				AND (RESV_DATE >= #{searchSdate} AND RESV_DATE <= #{searchEdate} )
+				]]>
+			</if>
+		ORDER BY RESV_NUM DESC
+			<if test="start != null and cntPerPage != null ">
+				LIMIT #{cntPerPage} offset #{start}
+			</if>
+	</select>
+	
+	<!-- 관리자 - 체험 예약현황 갯수 조회 -->
+	<select id="countAllResv" resultType="int">
+		SELECT COUNT(*) FROM RESV WHERE 1 = 1
+			<if test="searchKeyword != '' ">
+				AND ( RESV_NAME LIKE CONCAT('%',#{searchKeyword},'%') OR RESV_USERID LIKE CONCAT('%',#{searchKeyword},'%') )
+			</if>
+			<if test="searchSdate != null and searchEdate != null ">
+				<![CDATA[
+				AND (RESV_DATE >= #{searchSdate} AND RESV_DATE <= #{searchEdate} )
+				]]>
+			</if>
+			<if test="start != null and cntPerPage != null ">
+				LIMIT #{cntPerPage} offset #{start}
+			</if>		
+	</select>	
+
+</mapper>
