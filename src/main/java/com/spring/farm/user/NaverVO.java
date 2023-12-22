@@ -2,9 +2,9 @@ package com.spring.farm.user;
 
 public class NaverVO {		
 	
-	private String clientId = "dJ684BcMbtE3EAbNCUpY"; // 네이버 클라이언트 아이디 값
-    private String clientSecret = "fIiPneAI59"; //네이버 클라이언트 시크릿값
-    private String callback_url = "http://www.farmheidi.kro.kr/main.jsp"; // 네이버 리다이렉트url
+	private String clientId = ""; // 네이버 클라이언트 아이디 값
+    private String clientSecret = ""; //네이버 클라이언트 시크릿값
+    private String callback_url = ""; // 네이버 리다이렉트url
     
     // 콜백 정보 
     private String code;
