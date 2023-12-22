@@ -2,9 +2,9 @@ package com.spring.farm.user;
 
 public class KakaoVO {
 	
-	private String REDIRECT_URI = "http://www.farmheidi.kro.kr/"; // 카카오 리다이렉트 URI
-	private String REST_API_KEY = "800e4177fe74c3a081caffac5e719aad"; // 카카오 rest api key
-	private String ADMIN_KEY = "a9374f2ef30ff994391ccf879f149d01"; // 카카오 admin key
+	private String REDIRECT_URI = ""; // 카카오 리다이렉트 URI
+	private String REST_API_KEY = ""; // 카카오 rest api key
+	private String ADMIN_KEY = ""; // 카카오 admin key
 	private String code;
 	
 	public String getREDIRECT_URI() {
