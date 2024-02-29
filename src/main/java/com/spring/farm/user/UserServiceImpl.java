@@ -128,8 +128,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override // 핸드폰 인증
 	public String PhoneNumberCheck(String to) throws CoolsmsException {
-		String api_key = "NCSCCIAFJJGMDJUQ";
-		String api_secret = "TTHRZ6BXC7PVECLRGTP8AODKVA5MZAMA";
+		String api_key = "";
+		String api_secret = "";
 		Message coolsms = new Message(api_key, api_secret);
 		System.out.println("폰인증 서비스 임플");
 ////		랜덤 인증번호
@@ -143,7 +143,7 @@ public class UserServiceImpl implements UserService {
 
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("to", to); // 수신전화번호 (ajax로 view 화면에서 받아온 값으로 넘김)
-		params.put("from", "01027432630"); // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+		params.put("from", ""); // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
 		params.put("type", "sms");
 		params.put("text", "인증번호는 [" + numStr + "] 입니다.");
 		params.put("app_version", "test app 1.2"); // application name and version
