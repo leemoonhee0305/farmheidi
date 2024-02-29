@@ -1,4 +1,4 @@
-package com.spring.farm.user;
+3package com.spring.farm.user;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 		
 		sendMail.setSubject("아이디 찾기");
 		sendMail.setText("인증번호 "+mail_key);
-		sendMail.setFrom("1025farm1124@gmail.com");
+		sendMail.setFrom("");
 		sendMail.setTo(vo.getUser_mail());
 		
 		sendMail.send();
@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
 		
 		sendMail.setSubject("비밀번호 찾기");
 		sendMail.setText("임시 비밀번호 :: <h2>"+userKey+"</h2>"+"<br />로그인 후 비밀번호 변경을 해주세요.");
-		sendMail.setFrom("1025farm1124@gmail.com");
+		sendMail.setFrom("");
 		sendMail.setTo(vo.getUser_mail());
 		
 		sendMail.send();
